@@ -1,37 +1,58 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
-int strlen(char *s) {
-	int reti = 0;
-	while (*s) {
-	reti++;
-	s++;
-	}
-	return reti;
+int strlen(char* str) {
+  int len = 0;
+  while (str[len] != 0) {
+    len++;
+  }
+  return len;
 }
 
-
-char * strncpy(char * dest, char * source, int n) {
-
+char *strncpy(char* org, char* dest, int n) {
+  int i;
+  int len = strlen(org);
+  for(i = 0; i < n; i++) {
+    if(i < len) {
+      dest[i] = org[i];
+    }
+    else {
+      dest[i] = 0;
+    }
+  }
+  dest[n] = 0;
+  return dest;
 }
 
-char strcat( char *dest, char *source) {
-	
+char *strncat(char* org, char* dest, int n) {
+  int start = strlen(dest);
+  strncpy(dest + start, org, n);
+  return dest;
 }
 
-int strcmp(char *s1, char *s2) {
- 	 }
-	
-char * strchr(char *s, char *c){
-	
+int strcmp(char* s1, char* s2) {
+  int l1 = strlen(s1);
+  int l2 = strlen(s2);
+  int minLen = l1 < l2 ? l1 : l2;
+  int i = 0;
+  while(i < minLen && s1[i] == s2[i]) {
+    i++;
+  }
+  if(i == minLen) {
+    return l1 < l2 ? -1 : l1 > l2 ? 1 : 0;
+  }
+  else {
+    return s1[i] < s2[i] ? -1 : 1;
+  }
 }
 
-
-
-int main() {
-  char g[5] = "str";
-  printf( "Problem 1: %d\n", strlen(g) );
-  printf( "Problem 2: %d\n" );
-  printf( "Problem 3: %d\n" );
+char *myStrchr(char *str, char c) {
+  int i = 0;
+  while (str[i] != 0) {
+    if (str[i] == c) {
+      return str + i;
+    }
+    i++;
+  }
+  return NULL;
 }
